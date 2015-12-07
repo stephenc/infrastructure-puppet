@@ -66,6 +66,10 @@ Facter.add("asfcolo") do
         "phoenixnap-private"
       when /^195.154.([0-9]+).([0-9]+)$/
         "iliad-paris"
+      when /^207.244.88.([0-9]+)$/
+        "leaseweb-us"
+      when /^37.48.69.([0-9]+)$/
+        "leaseweb-nk"
       else
         "yahoo"
       end
