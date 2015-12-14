@@ -133,8 +133,9 @@ ldapserver::slapd_peers:
   3: ldap1-us-east.apache.org
   4: ldap1-eu-central.apache.org
   5: ldap1-us-west.apache.org
-  6: ldap2-us-east.apache.org
-  7: ldap2-eu-central.apache.org
+  6: snappy5.apache.org
+  7: ldap2-us-east.apache.org
+  8: ldap2-eu-central.apache.org
 
 ldapserver::schemas:
   - core
