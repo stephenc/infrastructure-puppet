@@ -8,6 +8,9 @@ classes:
   - vhosts_asf::vhosts
   - buildbot_asf
 
+base::basepackages:
+  - unzip
+
 apache::keepalive:          'On'
 apache::keepalive_timeout:  '15'
 apache::timeout: 600
