@@ -36,13 +36,13 @@ class build_slaves::jenkins (
     groups     => ['docker', 'jenkins'],
   }
 
-  file {'/home/jenkins/tool':
+  file {'/home/jenkins/tools':
     ensure => 'directory',
     owner  => 'jenkins',
     group  => 'jenkins',
   }
 
-  file {'/home/jenkins/tool/clover':
+  file {'/home/jenkins/tools/clover':
     ensure  => 'link',
     target  => '/usr/local/jenkins/clover'
     require => File['/usr/local/jenkins/clover'],
@@ -50,7 +50,7 @@ class build_slaves::jenkins (
     group   => 'jenkins',
   }
 
-  file {'/home/jenkins/tool/findbugs':
+  file {'/home/jenkins/tools/findbugs':
     ensure  => 'link',
     target  => '/usr/local/jenkins/findbugs'
     require => File['/usr/local/jenkins/findbugs'],
@@ -58,7 +58,7 @@ class build_slaves::jenkins (
     group   => 'jenkins',
   }
 
-  file {'/home/jenkins/tool/forrest':
+  file {'/home/jenkins/tools/forrest':
     ensure  => 'link',
     target  => '/usr/local/jenkins/forrest'
     require => File['/usr/local/jenkins/forrest'],
@@ -66,7 +66,7 @@ class build_slaves::jenkins (
     group   => 'jenkins',
   }
 
- file {'/home/jenkins/tool/java':
+ file {'/home/jenkins/tools/java':
     ensure  => 'link',
     target  => '/usr/local/jenkins/java'
     require => File['/usr/local/jenkins/java'],
@@ -74,7 +74,7 @@ class build_slaves::jenkins (
     group   => 'jenkins',
   }
 
-  file {'/home/jenkins/tool/jiracli':
+  file {'/home/jenkins/tools/jiracli':
     ensure  => 'link',
     target  => '/usr/local/jenkins/jiracli'
     require => File['/usr/local/jenkins/jiracli'],
