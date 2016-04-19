@@ -36,6 +36,52 @@ class build_slaves::jenkins (
     groups     => ['docker', 'jenkins'],
   }
 
+  file {'/home/jenkins/tool':
+    ensure => 'directory',
+    owner  => 'jenkins',
+    group  => 'jenkins',
+  }
+
+  file {'/home/jenkins/tool/clover':
+    ensure  => 'link',
+    target  => '/usr/local/jenkins/clover'
+    require => File['/usr/local/jenkins/clover'],
+    owner   => 'jenkins',
+    group   => 'jenkins',
+  }
+
+  file {'/home/jenkins/tool/findbugs':
+    ensure  => 'link',
+    target  => '/usr/local/jenkins/findbugs'
+    require => File['/usr/local/jenkins/findbugs'],
+    owner   => 'jenkins',
+    group   => 'jenkins',
+  }
+
+  file {'/home/jenkins/tool/forrest':
+    ensure  => 'link',
+    target  => '/usr/local/jenkins/forrest'
+    require => File['/usr/local/jenkins/forrest'],
+    owner   => 'jenkins',
+    group   => 'jenkins',
+  }
+
+ file {'/home/jenkins/tool/java':
+    ensure  => 'link',
+    target  => '/usr/local/jenkins/java'
+    require => File['/usr/local/jenkins/java'],
+    owner   => 'jenkins',
+    group   => 'jenkins',
+  }
+
+  file {'/home/jenkins/tool/jiracli':
+    ensure  => 'link',
+    target  => '/usr/local/jenkins/jiracli'
+    require => File['/usr/local/jenkins/jiracli'],
+    owner   => 'jenkins',
+    group   => 'jenkins',
+  }
+
   file { '/home/jenkins/env.sh':
     ensure => present,
     mode   => '0755',
