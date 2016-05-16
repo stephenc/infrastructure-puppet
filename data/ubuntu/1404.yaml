@@ -23,6 +23,7 @@ base::basepackages:
   - iotop
   - libnet-snmp-perl
   - libsnmp-perl
+  - ncdu
   - nload
   - screen
   - sockstat
