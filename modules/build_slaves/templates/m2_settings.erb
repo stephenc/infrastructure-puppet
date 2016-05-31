@@ -16,13 +16,42 @@
 
 
 </servers>
-  <mirrors>
-    <mirror>
-      <id>Nexus</id>
-      <mirrorOf>apache.snapshots</mirrorOf>
-      <name>Nexus</name>
-      <url>http://repository.apache.org/snapshots</url>
-    </mirror>
-  </mirrors>
+
+    <!-- Profile that adds the apache snapshot repo to maven (as normal and plugin repo) -->
+    <profiles>
+        <profile>
+            <id>apache-snapshots-enabled</id>
+            <!--Enable snapshots for the built in central repo and plugin repo -->
+            <repositories>
+                <repository>
+                    <id>apache-snapshots</id>
+                    <url>http://repository.apache.org/snapshots/&lt;/url>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>apache-snapshots</id>
+                    <url>http://repository.apache.org/snapshots/&lt;/url>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+    </profiles>
+
+    <!-- Activate the apache-snapshots-enabled profile -->
+    <activeProfiles>
+        <activeProfile>apache-snapshots-enabled</activeProfile>
+    </activeProfiles> 
 
 </settings>
