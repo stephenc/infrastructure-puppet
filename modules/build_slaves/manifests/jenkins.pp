@@ -57,13 +57,6 @@ class build_slaves::jenkins (
     }
   }
 
-  define build_slaves::symlink_maven ($maven_version = $title) {
-    file {"/home/jenkins/tools/maven/$maven_version":
-      ensure => link,
-      target => "/usr/local/jenkins/maven/$maven_version",
-    }
-  }
- 
   define build_slaves::symlink_jenkins ($javaj = $title) {
     file {"/home/jenkins/tools/java/$javaj":
       ensure => link,
@@ -230,11 +223,6 @@ class build_slaves::jenkins (
     target => "/usr/local/jenkins/jiracli/jira-cli-2.1.0",
   }
 
-  file { "/home/jenkins/tools/maven/latest":
-    ensure => link,
-    target => "/usr/local/jenkins/maven/apache-maven-3.2.1",
-  }
-
   file { "/home/jenkins/tools/java/latest":
     ensure => link,
     target => "/usr/local/jenkins/java/jdk1.8.0",
@@ -263,10 +251,6 @@ class build_slaves::jenkins (
   file { "/home/jenkins/tools/java/latest1.8":
     ensure => link,
     target => "/usr/local/jenkins/java/jdk1.8.0",
-  }
-
-  service { 'apache2':
-    ensure => 'stopped',
   }
 
 
