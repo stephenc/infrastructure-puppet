@@ -3,6 +3,8 @@ classes:
   - apache
   - apache::mod::headers
   - apache::mod::authnz_ldap
+  - apache::mod::wsgi
+  - comdev_server
   - default_pvm_asf
   - elasticsearch
   - loggy
@@ -36,6 +38,9 @@ base::basepackages:
   - 'lua5.2-cjson'
   - 'lua5.2-socket'
   - 'lua5.2-sec'
+  - python-psycopg2
+  - python-lxml
+  - python-libxml2
   
 elasticsearch::init_defaults:
   ES_HEAP_SIZE: '1g'
