@@ -1,0 +1,8 @@
+[user]
+        name = jenkins
+        email = infrastructure@apache.org
+[push]
+        default = nothing
+
+[credential]
+        helper = store

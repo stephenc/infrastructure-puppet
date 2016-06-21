@@ -196,6 +196,21 @@ class build_slaves::jenkins (
     match => '^USERGROUPS_ENAB.*'
   }
 
+  file {
+   "/home/jenkins/.git-credentials":
+     content => template('build_slaves/git-credentials.erb'),
+     mode    => '0640',
+     owner   => $username,
+     group   => $groupname;
+
+   "/home/jenkins/.gitconfig":
+     ensure => 'present',
+     source => 'puppet:///modules/build_slaves/gitconfig',
+     mode    => '0644',
+     owner   => $username,
+     group   => $groupname;
+  }
+
   file {"/home/jenkins/tools/":
     ensure  => 'directory',
     owner   => 'jenkins',
