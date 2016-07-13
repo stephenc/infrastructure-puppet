@@ -350,6 +350,7 @@ build_slaves::distro_packages:
   - liblzo2-dev
   - liblua5.2-dev
   - libmono-system-web2.0-cil
+  - libpam0g-dev
   - libqt4-dev
   - libsasl2-dev
   - libsnappy-dev
