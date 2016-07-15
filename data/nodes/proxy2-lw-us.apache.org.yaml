@@ -507,7 +507,7 @@ issues-test:
     custom_fragment: |
       Redirect permanent /bugzilla https://bz.apache.org/bugzilla
       Redirect permanent /SpamAssassin https://bz.apache.org/SpamAssassin
-      Redirect permanent /ooo https://bz.apache.org/ooo    
+      Redirect permanent /ooo https://bz.apache.org/ooo
 
       ProxyPreserveHost on
 
@@ -525,7 +525,7 @@ issues-test:
       ProxyPass /jira http://arcas.apache.org:10343/jira   retry=0 timeout=1800 max=400
       SetEnvIf Request_URI "^/activemq" asf_proxy=issues-vm.jira-main
       SetEnvIf Request_URI "^/jira" asf_proxy=issues-vm.jira-main
-      
+
       # Anti-spam for Aardvark
       LuaScope thread
       LuaInputFilter AntiSpam /usr/local/etc/aardvark/filter.lua input_filter
@@ -599,7 +599,7 @@ issues-test:
       # RewriteCond %%{}{REMOTE_ADDR} !2\.24\.222\.166
       # RewriteRule ^/(.*) /maintenance.html
       # RewriteCond %%{}{REMOTE_ADDR} 2\.24\.222\.166
-      # RewriteRule ^/(.*) http://bil.zones.apache.org:10180/$1 [P]     
+      # RewriteRule ^/(.*) http://bil.zones.apache.org:10180/$1 [P]
 
       # Protect cookies - not sure this is needed yet
       <Location / >
