@@ -1954,6 +1954,31 @@ vhosts_asf::vhosts::vhosts:
     custom_fragment: |
       Redirect permanent / http://zest.apache.org/
 
+  quarks:
+    vhost_name: '*'
+    port: 80
+    servername: 'quarks.apache.org'
+    docroot: '/var/www/edgent.apache.org'
+    manage_docroot: false
+    serveradmin: 'infrastructure@apache.org'
+    access_log_file: 'weblog.log'
+    error_log_file: 'errorlog.log'
+    custom_fragment: |
+      Redirect permanent / http://edgent.apache.org/
+
+  quarks-ssl:
+    vhost_name: '*'
+    port: 443
+    ssl: true
+    servername: 'quarks.apache.org'
+    docroot: '/var/www/edgent.apache.org'
+    manage_docroot: false
+    serveradmin: 'infrastructure@apache.org'
+    access_log_file: 'weblog.log'
+    error_log_file: 'errorlog.log'
+    custom_fragment: |
+      Redirect permanent / https://edgent.apache.org/
+
   quetz:
     vhost_name: '*'
     port: 80
