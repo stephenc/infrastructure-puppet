@@ -32,18 +32,6 @@ class puppet_asf (
         creates => "/root/puppetlabs-release-pc1-trusty.deb",
         timeout => 600,
       }->
-      exec { 'get puppet key':
-        cwd     => "/root",
-        command => "/usr/bin/curl --remote-name --location https://apt.puppetlabs.com/DEB-GPG-KEY-puppet",
-        creates => "/root/DEB-GPG-KEY-puppet",
-        timeout => 600,
-      }->
-      exec { 'install key':
-        cwd     => "/root/",
-        command => "/usr/bin/gpg --keyid-format 0xLONG --with-fingerprint ./DEB-GPG-KEY-puppet|grep 7F438280EF8D349F",
-        unless  => "/usr/bin/apt-key list|grep EF8D349F",
-        timeout => 60,
-      }->
       exec {'apt update':
         command => "/usr/bin/apt update",
         unless  => "/usr/bin/dpkg -la|grep puppet.*3.8.7",
