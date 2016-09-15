@@ -9,3 +9,6 @@ classes:
 
 oraclejava::install::version: '8'
 oraclejava::install::unlimited_jce: true
+
+base::basepackages:
+  - 'asf-build-apache-maven-3.3.9'
