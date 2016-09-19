@@ -4,6 +4,7 @@ classes:
   - apache::mod::proxy
   - apache::mod::proxy_http
   - apache::mod::rewrite
+  - apache::mod::headers
   - cwiki_asf
   - blocky
   - loggy
@@ -80,3 +81,8 @@ vhosts_asf::vhosts::vhosts:
         ProxyPassReverse /confluence/ http://127.0.0.1:8888/confluence/
         RewriteCond $1 !(confluence|intermediates)
         RewriteRule ^/(.*) https://cwiki.apache.org/confluence/display/$1 [R=301,L]
+        Header set Access-Control-Allow-Origin "*"
+        Header set Access-Control-Allow-Methods "POST, GET, OPTIONS"
+        Header set Access-Control-Allow-Headers "X-PINGOTHER"
+        Header set Access-Control-Max-Age "1728000"
+
