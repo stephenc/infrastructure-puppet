@@ -18,8 +18,35 @@ class buildbot_slave (
   $gsr_user,
   $gsr_pw,
 
+  $java_asfpackages = ['jdk1.7.0_79-unlimited-security', 'jdk1.7.0_80', 'jdk1.8.0_66-unlimited-security', 'jdk1.8.0_92', 'jdk1.8.0_102', 'jdk-9-ea-b128', 'jdk-9-ea-b132', 'ibm-java-x86_64-80'],
 ){
 
+  #define java symlinking
+  define build_slaves::symlink_asfpackages ($javaa = $title) {
+    file {"/home/jenkins/tools/java/${javaa}":
+      ensure => link,
+      target => "/usr/local/asfpackages/java/${javaa}",
+    }
+  }
+
+  build_slaves::symlink_asfpackages  { $java_asfpackages: }
+
+  file { '/home/jenkins/tools/java/ibm-1.7-64':
+    ensure => link,
+    target => '/usr/local/asfpackages/java/ibm-java-x86_64-70',
+  }
+  file { '/home/jenkins/tools/java/latest':
+    ensure => link,
+    target => '/usr/local/asfpackages/java/jdk1.8.0_102',
+  }
+  file { '/home/jenkins/tools/java/latest1.7':
+    ensure => link,
+    target => '/usr/local/asfpackages/java/jdk1.7.0_80',
+  }
+  file { '/home/jenkins/tools/java/latest1.8':
+    ensure => link,
+    target => '/usr/local/asfpackages/java/jdk1.8.0_102',
+  }
   # install required packages:
 
   $bb_basepackages = [
