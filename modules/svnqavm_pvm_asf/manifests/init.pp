@@ -57,15 +57,9 @@ class svnqavm_pvm_asf (
       environment => "SVNVERSION=/usr/local/svn-current/bin/svnversion";
   }
 
-  file { '/home/wayita/wayita/wc/wayita.service':
-    ensure => file,
-    owner  => wayita,
-    group  => wayita,
-    mode   => '0644',
-    source => 'puppet:///modules/svnqavm_pvm_asf/wayita.service',
-  } ~>
-  Exec['systemctl-daemon-reload]
-
+  ::systemd::unit_file { 'watiya.service':
+    source => "puppet:///modules/svnqavm_pvm_asf/wayita.service",
+  }
 
 
 }
