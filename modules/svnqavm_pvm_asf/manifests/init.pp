@@ -1,5 +1,7 @@
 # /etc/puppet/modules/svnqavm_pvm_asf/manifests/init.pp
 
+include systemd
+
 class svnqavm_pvm_asf (
 
   $required_packages = ['libapr1-dev' , 'libaprutil1-dev'],
@@ -54,5 +56,16 @@ class svnqavm_pvm_asf (
       minute      => 0,
       environment => "SVNVERSION=/usr/local/svn-current/bin/svnversion";
   }
+
+  file { '/home/wayita/wayita/wc/wayita.service':
+    ensure => file,
+    owner  => wayita,
+    group  => wayita,
+    mode   => '0644',
+    source => 'puppet:///modules/svnqavm_pvm_asf/wayita.service',
+  } ~>
+  Exec['systemctl-daemon-reload]
+
+
 
 }

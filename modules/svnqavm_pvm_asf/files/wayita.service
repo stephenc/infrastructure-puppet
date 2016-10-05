@@ -1,0 +1,25 @@
+#
+# systemd configuration file
+#
+
+[Unit]
+Description=wayita: IRC bot serving 'factoids'
+After=networking.service
+
+[Service]
+Type=simple
+ExecStart=/home/wayita/wayita/wc/src/main.py ../conf/wayita.conf
+ExecStop=/home/wayita/wayita/wc/src/wayitactl.py ../conf/wayita.conf quit
+PIDFile=/home/wayita/wayita/run/wayita.pid
+WorkingDirectory=/home/wayita/wayita/wc
+User=wayita
+Group=wayita
+StandardInput=null
+StandardOutput=null
+StandardError=null
+Restart=always
+RestartSec=10s
+
+[Install]
+WantedBy=multi-user.target
+
