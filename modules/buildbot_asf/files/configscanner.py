@@ -291,6 +291,7 @@ class PubSubClient(Thread):
                                     before = revision - 1
                                     print("%s changed, validating..." % buildbotFile)
                                     os.environ['HOME'] = '/x1/buildmaster'
+                                    os.chdir("/x1/buildmaster/master1")
                                     try:
                                         os.chdir(buildbotDir)
                                         print("Checking out new config")
