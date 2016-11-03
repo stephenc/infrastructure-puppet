@@ -31,7 +31,8 @@ parser.add_argument("--linactive", action = 'store_true', help = "Lists the inac
 parser.add_argument("--delete", action = 'store_true', help = "Removes inactive users")
 parser.add_argument("--test", action = 'store_true', help = "Just test, don't delete anything")
 parser.add_argument("--names", action = 'store_true', help = "Print users' names instead of UIDs")
-
+parser.add_argument("--gonly", action = 'store_true', help = "Only act on global users")
+parser.add_argument("--backup", action = 'store_true', help = "Keep a backup of the files instead of deleting them")
 args = parser.parse_args()
 
 
@@ -82,7 +83,7 @@ for wiki in wikis:
                         if not uid in active_users:
                             upath = "%s/%s/data/user/%s" % (args.data, wiki, uid)
                             if args.globaldir and os.path.exists("%s/user/%s" % (args.globaldir, uid)):
-                                upath = "%s/%s" % (args.globaldir, uid)
+                                upath = "%s/user/%s" % (args.globaldir, uid)
                             active_users[uid] = upath
                     
             f.close()
@@ -101,7 +102,7 @@ if args.globaldir:
             for u in au:
                 if u != "name2id" and u != "README":
                     all_users[u] = "%s/user/%s" % (args.globaldir, u)
-        with open("%s/edit-log" % (args.data), "r") as f:
+        with open("%s/edit-log" % (args.globaldir), "r") as f:
             for line in f:
                 # timestamp gunk gunk gunk gunk gunk user-id
                 match = re.match(r"(\d+)\s+\d+\s+\S+\s+\S+\s+\S+\s+\S+\s+([0-9.]+)", line)
@@ -123,14 +124,15 @@ if args.lactive:
     if args.names:
         for uid in active_users:
             fpath = active_users[uid]
-            with open(fpath, "r") as f:
-                d = f.read()
-                f.close()
-                m = re.search(r"name=([^\r\n]+)", d)
-                if m:
-                    print(m.group(1))
-                else:
-                    print(uid)
+            if (not args.gonly) or (args.globaldir and fpath.find(args.globaldir) != -1):
+                with open(fpath, "r") as f:
+                    d = f.read()
+                    f.close()
+                    m = re.search(r"name=([^\r\n]+)", d)
+                    if m:
+                        print(m.group(1))
+                    else:
+                        print(uid)
     else:
         for uid in active_users:
             print(uid)
@@ -139,25 +141,32 @@ elif args.linactive:
     print("Inactive users:")
     for user in all_users:
         if not user in active_users:
-                if os.path.exists("%s/user/%s" % (args.globaldir, user)):
+            if os.path.exists("%s/user/%s" % (args.globaldir, user)):
+                if (not args.gonly) or (args.globaldir and all_users[user].find(args.globaldir) != -1):
                     print("%s (global)" % user)
-                else:
-                    print("%s (local)" % user)
+            elif not args.gonly:
+                print("%s (local)" % user)
 # rm the inactive?
 if args.delete:
     inactive_users = {}
     ia = 0
     for user in all_users:
         if not user in active_users:
-            inactive_users[user] = all_users[user]
-            ia += 1
+            if (not args.gonly) or (args.globaldir and all_users[user].find(args.globaldir) != -1):
+                inactive_users[user] = all_users[user]
+                ia += 1
     print("Removing %u users from the system..." % ia)
+    time.sleep(2)
     rm = 0
     for user in inactive_users:
         rm += 1
         if not args.test:
             fpath = inactive_users[user]
-            if os.path.isfile(fpath):
-                os.unlink(fpath)
+            if (not args.gonly) or (args.globaldir and fpath.find(args.globaldir) != -1):
+                if os.path.isfile(fpath):
+                    if args.backup:
+                        os.rename(fpath, fpath + ".deleted")
+                    else:
+                        os.unlink(fpath)
             if(rm % 10000 == 0):
                 print("Removed %u users so far..." % rm)
