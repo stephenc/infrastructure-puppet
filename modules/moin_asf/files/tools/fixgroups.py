@@ -14,7 +14,7 @@ import argparse
 
 # dir/file shortcuts
 def files(mypath):
-    return [f for f in listdir(mypath) if isfile(join(mypath, f))]
+    return [f for f in listdir(mypath) if isfile(join(mypath, f)) and f.find(".old") == -1]
     
 def dirs(mypath):
     return [f for f in listdir(mypath) if isdir(join(mypath, f))]
@@ -27,6 +27,8 @@ all_users = {}
 parser = argparse.ArgumentParser()
 parser.add_argument("--data", type= str, help = "Base moin wiki data directory")
 parser.add_argument("--shared", type= str, help = "Optional shared (global) moin data dir")
+parser.add_argument("--test", action='store_true', help = "Don't save changes, only check for missing users")
+parser.add_argument("--filter", type=str, help = "Only parse wikis matching this filter")
 
 args = parser.parse_args()
 
@@ -42,7 +44,8 @@ if args.shared:
 
 # For each wiki, ...
 for wiki in wikis:
-    
+    if args.filter and wiki.find(args.filter) == -1:
+        continue
     # Reset user list
     allusers = []
     
@@ -73,6 +76,7 @@ for wiki in wikis:
         afile = None
         i = 0
         actives = []
+        hasAdminGroup = False
         # Get the last revision of the contributors group (alphasort, pick [-1])
         if os.path.isdir("%s/%s/data/pages/ContributorsGroup/revisions/" % (args.data, wiki)):
             rv = files("%s/%s/data/pages/ContributorsGroup/revisions/" % (args.data, wiki))
@@ -85,7 +89,9 @@ for wiki in wikis:
                     name = match.group(1)
                     if name.lower() != "admingroup":
                         contribs.append(name)
-        
+                    else:
+                        hasAdminGroup = True
+            
         needchange = False
         # For each name, check if the account exists on disk
         for name in contribs:
@@ -100,9 +106,12 @@ for wiki in wikis:
             else:
                 # If still active, append to list of names to put in the new list
                 actives.append(name)
-                
+        
+        if not hasAdminGroup:
+            print("%s is missing AdminGroup!" % wiki)
+        
         # Do we need to write a new group file?
-        if len(actives) > 0 and afile and needchange:
+        if len(actives) > 0 and afile and (needchange or not hasAdminGroup) and not args.test:
             print("Making new, pruned, contributors group file for %s" % wiki)
             
             # Make a backup copy first
@@ -121,6 +130,7 @@ for wiki in wikis:
 Related: [[AdminGroup| Administrators]] with permission to grant privileges to Contributors, in addition to being Contributors themselves.
 NOTE: This list is not publicly viewable.
 
+ * AdminGroup
 """)
                 for name in actives:
                     f.write(" * %s\r\n" % name)
@@ -157,9 +167,10 @@ NOTE: This list is not publicly viewable.
             else:
                 actives.append(name)
 
-
-        if len(actives) > 0 and afile and needchange:
+        if len(actives) > 0 and afile and needchange and not args.test:
             print("Making new, pruned, admin group file for %s" % wiki)
+            if not hasAdminGroup:
+                print("AdminGroup missing!")
             with open(afile, "r") as f:
                 d = f.read()
                 f.close()
