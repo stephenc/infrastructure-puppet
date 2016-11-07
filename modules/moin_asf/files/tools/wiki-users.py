@@ -33,6 +33,7 @@ parser.add_argument("--test", action = 'store_true', help = "Just test, don't de
 parser.add_argument("--names", action = 'store_true', help = "Print users' names instead of UIDs")
 parser.add_argument("--gonly", action = 'store_true', help = "Only act on global users")
 parser.add_argument("--backup", action = 'store_true', help = "Keep a backup of the files instead of deleting them")
+parser.add_argument("--filter", type= str, help = "Only scan wikis matching this filter")
 args = parser.parse_args()
 
 
@@ -59,6 +60,8 @@ time.sleep(4)
 
 # For each wiki, ...
 for wiki in wikis:
+    if args.filter and wiki.find(args.filter) == -1:
+        continue
     print("Analyzing %s..." % wiki)
     
     # Only perform analysis is the edit log exists, otherwise no point
@@ -128,7 +131,7 @@ if args.lactive:
                 with open(fpath, "r") as f:
                     d = f.read()
                     f.close()
-                    m = re.search(r"name=([^\r\n]+)", d)
+                    m = re.search(r"\nname=([^\r\n]+)", d)
                     if m:
                         print(m.group(1))
                     else:
