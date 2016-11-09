@@ -133,7 +133,11 @@ NOTE: This list is not publicly viewable.
  * AdminGroup
 """)
                 for name in actives:
-                    f.write(" * %s\r\n" % name)
+                    # Names with spaces need [[]] around them.
+                    if name.find(" ") == -1:
+                        f.write(" * %s\r\n" % name)
+                    else:
+                        f.write(" * [[%s]]\r\n" % name)
                 f.write("\r\n")
                 f.close()
     
@@ -184,7 +188,11 @@ This is a list of people who can do editing of the LocalBadContent and Contribut
 
 """)
                 for name in actives:
-                    f.write(" * %s\r\n" % name)
+                    # Names with spaces need [[]] around them.
+                    if name.find(" ") == -1:
+                        f.write(" * %s\r\n" % name)
+                    else:
+                        f.write(" * [[%s]]\r\n" % name)
                 f.write("\r\n")
                 f.close()
 
