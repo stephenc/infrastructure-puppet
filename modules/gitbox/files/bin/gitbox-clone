@@ -34,7 +34,9 @@ def options():
         op.make_option('-d', '--description', metavar="DESC", dest='desc',
             help="A short project description. ie, 'Apache Jackrabbit'"),
         op.make_option('-c', '--commit', metavar="COMMIT", dest='commit',
-            help="Commits email address. ie, 'commits@foo.apache.org'")
+            help="Commits email address. ie, 'commits@foo.apache.org'"),
+        op.make_option('-b', '--branch', metavar="BRANCH", dest='branch',
+            help="Specific default branch other than master.")
     ]
 
 
@@ -56,17 +58,17 @@ def main():
     if os.path.exists(git_dir):
         error("Git directory exists: %s" % git_dir)
 
-    clone_git(git_url, git_dir, opts.desc)
+    clone_git(git_url, git_dir, opts.desc, opts.branch)
     cleanup_clone()
     configure_asfgit(git_dir, opts.commit)
 
 
-def clone_git(git_url, git_dir, desc):
+def clone_git(git_url, git_dir, desc, branch):
     log("Initializing Git repository.")
     git("clone", "--mirror", git_url, git_dir)
 
     try:
-      if not sp.check_output(["git", "ls-remote", git_url, "master"]):
+      if not sp.check_output(["git", "ls-remote", git_url, branch if branch else "master"]):
         log("Moving trunk to master")
         git("symbolic-ref", "HEAD", "refs/heads/master")
         git("branch", "-m", "trunk", "master")
