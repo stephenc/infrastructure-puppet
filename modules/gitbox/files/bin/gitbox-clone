@@ -36,7 +36,9 @@ def options():
         op.make_option('-c', '--commit', metavar="COMMIT", dest='commit',
             help="Commits email address. ie, 'commits@foo.apache.org'"),
         op.make_option('-b', '--branch', metavar="BRANCH", dest='branch',
-            help="Specific default branch other than master.")
+            help="Specific default branch other than master."),
+        op.make_option('-w', '--writeable', metavar="WRITE", dest='write',
+            help="Make this repository writeable (default is mirror)")
     ]
 
 
@@ -60,7 +62,7 @@ def main():
 
     clone_git(git_url, git_dir, opts.desc, opts.branch)
     cleanup_clone()
-    configure_asfgit(git_dir, opts.commit)
+    configure_asfgit(git_dir, opts.commit, "true" if opts.write else "false")
 
 
 def clone_git(git_url, git_dir, desc, branch):
@@ -88,7 +90,7 @@ def cleanup_clone():
     git("gc", "--aggressive")
 
 
-def configure_asfgit(git_dir, commit):
+def configure_asfgit(git_dir, commit, write):
     asfgit = os.getenv("ASFGIT_ADMIN") or "/x1/gitbox"
     if not os.path.exists(asfgit):
         log("WARNING: asfgit-admin directory not found.")
@@ -124,12 +126,12 @@ def configure_asfgit(git_dir, commit):
         with open(cfgfile) as handle:
             config = handle.read()
         git_repo = os.path.basename(git_dir)
-        config = config % {"git_repo": git_repo, "commit": commit}
+        config = config % {"git_repo": git_repo, "commit": commit, "write": write}
 
         # Append the config data to the git config
         # and let the user review it.
         if not os.path.exists(dstfile):
-            error("Missing destinationg git config: %s" % dstfile)
+            error("Missing destination git config: %s" % dstfile)
         with open(dstfile, "a") as handle:
             handle.write(config)
 
