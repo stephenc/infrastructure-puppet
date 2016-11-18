@@ -1,0 +1,4 @@
+right now the credentials for mergebot are encrypted in the 
+git1-us-west.apache.org.yaml but once the code starts getting added we can move
+those here.  the management of the encrypted data will be done by infra, but
+injected into your code with the module
