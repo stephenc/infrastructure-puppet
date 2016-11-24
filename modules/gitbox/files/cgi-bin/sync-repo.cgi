@@ -72,6 +72,7 @@ if 'repository' in data and 'name' in data['repository']:
         #######################################
         if before:
             try:
+                os.chdir("/x1/repos/asf/%s.git" % reponame)
                 subprocess.check_call(['git','cat-file','-e', before])
             except:
                 pass # TODO: Add notification thing for infra or PMC
