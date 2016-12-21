@@ -3,7 +3,6 @@ classes:
   - buildbot_slave
   - buildbot_slave::rvm
   - loggy
-  - rvm
 
 buildbot_slave::slave_name: 'bb_slave3_ubuntu'
 buildbot_slave::required_packages:
