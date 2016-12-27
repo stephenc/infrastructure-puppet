@@ -32,12 +32,13 @@ class gitbox (
   }
   
   file { '/x1/gitbox':
-    source  => 'puppet:///modules/gitbox',
-    recurse => true,
-    owner   => 'root',
-    group   => 'www-data',
+    ensure   => directory,
+    source   => 'puppet:///modules/gitbox',
+    recurse  => true,
+    owner    => 'root',
+    group    => 'www-data',
     checksum => 'md5',
-    mode    => '0750';
+    mode     => '0750';
   }
   
   
