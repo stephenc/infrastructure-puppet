@@ -1,7 +1,7 @@
 #/etc/puppet/modules/blogs_asf/manifests/init.pp
 
 class blogs_asf (
-  $required_packages = ['tomcat8'],
+  $required_packages = ['tomcat8', 'libmysql-java'],
 
 # override below in yaml
   $roller_version          = '',
@@ -131,6 +131,10 @@ class blogs_asf (
       group   => 'root',
       mode    => '0640',
       require => [File[$parent_dir],Package['tomcat8']];
+    '/usr/share/tomcat8/lib/mysql-connector-java-5.1.38.jar';
+      ensure  => link,
+      target  => '/usr/share/java/mysql-connector-java-5.1.38.jar',
+      require => Package['libmysql-java'];
     "${mysql_connector_dest_dir}/${mysql_connector}":
       ensure  => present,
       owner   => 'tomcat8',
