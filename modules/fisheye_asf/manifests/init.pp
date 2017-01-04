@@ -140,14 +140,14 @@ file {
       owner   => 'fisheye',
       group   => 'fisheye',
       mode    => '0755',
-      require => [Package['subversion'],File[$fisheye_home]];
+      require => [Package['subversion'],User[$username]];
     "/home/${username}/.subversion/servers":
       ensure  => present,
       owner   => 'fisheye',
       group   => 'fisheye',
       mode    => '0644',
       source  => "puppet:///modules/fisheye_asf/home/subversion/servers",
-      require => [Package['subversion'],File[$fisheye_home]];
+      require => [Package['subversion'],File['.subversion']];
   }    
 
   ::systemd::unit_file { "fisheye.service":
