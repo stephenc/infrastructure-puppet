@@ -131,7 +131,7 @@ class blogs_asf (
       group   => 'root',
       mode    => '0640',
       require => [File[$parent_dir],Package['tomcat8']];
-    '/usr/share/tomcat8/lib/mysql-connector-java-5.1.38.jar';
+    '/usr/share/tomcat8/lib/mysql-connector-java-5.1.38.jar':
       ensure  => link,
       target  => '/usr/share/java/mysql-connector-java-5.1.38.jar',
       require => Package['libmysql-java'];
