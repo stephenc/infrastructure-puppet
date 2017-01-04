@@ -135,13 +135,13 @@ file {
       ensure  => link,
       target  => '/usr/share/java/mysql-connector-java-5.1.38.jar',
       require => Package['libmysql-java'];
-    "${fisheye_home}/.subversion":
+    "/home/${username}/.subversion":
       ensure  => directory,
       owner   => 'fisheye',
       group   => 'fisheye',
       mode    => '0755',
       require => [Package['subversion'],File[$fisheye_home]];
-    "${fisheye_home}/.subversion/servers":
+    "/home/${username}/.subversion/servers":
       ensure  => present,
       owner   => 'fisheye',
       group   => 'fisheye',
