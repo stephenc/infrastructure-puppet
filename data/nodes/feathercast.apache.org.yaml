@@ -1,0 +1,12 @@
+---
+classes:
+  - feathercast_asf
+#  - hunner-wordpress
+
+
+# hunner-wordpress class variables. Need to pull more from hunner-wordpress module
+hunner-wordpress::wordpress_version: '4.7'
+hunner-wordpress::parent_dir: '/usr/local/wordpress'
+hunner-wordpress::context_path: '/wordpress'
+
+#still need feathercast_asf vars
