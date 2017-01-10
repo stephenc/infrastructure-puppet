@@ -144,16 +144,6 @@ apt::sources:
     include:
       deb: true
       src: false
-  'vmware-tools':
-    location: 'http://packages.vmware.com/packages/ubuntu'
-    release: 'trusty'
-    repos: 'main'
-    key:
-      id: '36E47E1CC4DCC5E8152D115CC0B5E0AB66FD4949'
-      server: 'pool.sks-keyservers.net'
-    include:
-      deb: true
-      src: false
   'nodesource-6':
     location: 'https://deb.nodesource.com/node_6.x'
     release: 'xenial'
