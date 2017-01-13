@@ -1,0 +1,4 @@
+base::basepackages:
+  - python2
+  - apache
+  

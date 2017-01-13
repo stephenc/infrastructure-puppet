@@ -1,0 +1,30 @@
+I, [2017-01-11T17:13:43.837915 #5087]  INFO -- Kitchen: -----> Starting Kitchen (v1.13.2)
+E, [2017-01-11T17:13:43.838132 #5087] ERROR -- Kitchen: ------Exception-------
+E, [2017-01-11T17:13:43.838164 #5087] ERROR -- Kitchen: Class: Kitchen::UserError
+E, [2017-01-11T17:13:43.838185 #5087] ERROR -- Kitchen: Message: Kitchen YAML file /home/fbarboza/APACHE/infrastructure-puppet/.kitchen.yml does not exist.
+E, [2017-01-11T17:13:43.838203 #5087] ERROR -- Kitchen: ----------------------
+E, [2017-01-11T17:13:43.838220 #5087] ERROR -- Kitchen: ------Backtrace-------
+E, [2017-01-11T17:13:43.838237 #5087] ERROR -- Kitchen: /var/lib/gems/2.3.0/gems/test-kitchen-1.13.2/lib/kitchen/loader/yaml.rb:74:in `read'
+E, [2017-01-11T17:13:43.838255 #5087] ERROR -- Kitchen: /var/lib/gems/2.3.0/gems/test-kitchen-1.13.2/lib/kitchen/config.rb:154:in `data'
+E, [2017-01-11T17:13:43.838273 #5087] ERROR -- Kitchen: /var/lib/gems/2.3.0/gems/test-kitchen-1.13.2/lib/kitchen/config.rb:133:in `suites'
+E, [2017-01-11T17:13:43.838290 #5087] ERROR -- Kitchen: /var/lib/gems/2.3.0/gems/test-kitchen-1.13.2/lib/kitchen/config.rb:184:in `filter_instances'
+E, [2017-01-11T17:13:43.838308 #5087] ERROR -- Kitchen: /var/lib/gems/2.3.0/gems/test-kitchen-1.13.2/lib/kitchen/config.rb:143:in `build_instances'
+E, [2017-01-11T17:13:43.838326 #5087] ERROR -- Kitchen: /var/lib/gems/2.3.0/gems/test-kitchen-1.13.2/lib/kitchen/config.rb:119:in `instances'
+E, [2017-01-11T17:13:43.838343 #5087] ERROR -- Kitchen: /var/lib/gems/2.3.0/gems/test-kitchen-1.13.2/lib/kitchen/command.rb:115:in `filtered_instances'
+E, [2017-01-11T17:13:43.838360 #5087] ERROR -- Kitchen: /var/lib/gems/2.3.0/gems/test-kitchen-1.13.2/lib/kitchen/command.rb:145:in `parse_subcommand'
+E, [2017-01-11T17:13:43.838377 #5087] ERROR -- Kitchen: /var/lib/gems/2.3.0/gems/test-kitchen-1.13.2/lib/kitchen/command/action.rb:38:in `block in call'
+E, [2017-01-11T17:13:43.838394 #5087] ERROR -- Kitchen: /usr/lib/ruby/2.3.0/benchmark.rb:293:in `measure'
+E, [2017-01-11T17:13:43.838411 #5087] ERROR -- Kitchen: /var/lib/gems/2.3.0/gems/test-kitchen-1.13.2/lib/kitchen/command/action.rb:37:in `call'
+E, [2017-01-11T17:13:43.838428 #5087] ERROR -- Kitchen: /var/lib/gems/2.3.0/gems/test-kitchen-1.13.2/lib/kitchen/cli.rb:56:in `perform'
+E, [2017-01-11T17:13:43.838445 #5087] ERROR -- Kitchen: /var/lib/gems/2.3.0/gems/test-kitchen-1.13.2/lib/kitchen/cli.rb:186:in `block (2 levels) in <class:CLI>'
+E, [2017-01-11T17:13:43.838467 #5087] ERROR -- Kitchen: /usr/lib/ruby/vendor_ruby/thor/command.rb:27:in `run'
+E, [2017-01-11T17:13:43.838484 #5087] ERROR -- Kitchen: /usr/lib/ruby/vendor_ruby/thor/invocation.rb:126:in `invoke_command'
+E, [2017-01-11T17:13:43.838501 #5087] ERROR -- Kitchen: /var/lib/gems/2.3.0/gems/test-kitchen-1.13.2/lib/kitchen/cli.rb:334:in `invoke_task'
+E, [2017-01-11T17:13:43.838518 #5087] ERROR -- Kitchen: /usr/lib/ruby/vendor_ruby/thor.rb:359:in `dispatch'
+E, [2017-01-11T17:13:43.838535 #5087] ERROR -- Kitchen: /usr/lib/ruby/vendor_ruby/thor/base.rb:440:in `start'
+E, [2017-01-11T17:13:43.838552 #5087] ERROR -- Kitchen: /var/lib/gems/2.3.0/gems/test-kitchen-1.13.2/bin/kitchen:13:in `block in <top (required)>'
+E, [2017-01-11T17:13:43.838569 #5087] ERROR -- Kitchen: /var/lib/gems/2.3.0/gems/test-kitchen-1.13.2/lib/kitchen/errors.rb:174:in `with_friendly_errors'
+E, [2017-01-11T17:13:43.838586 #5087] ERROR -- Kitchen: /var/lib/gems/2.3.0/gems/test-kitchen-1.13.2/bin/kitchen:13:in `<top (required)>'
+E, [2017-01-11T17:13:43.838603 #5087] ERROR -- Kitchen: /usr/local/bin/kitchen:22:in `load'
+E, [2017-01-11T17:13:43.838620 #5087] ERROR -- Kitchen: /usr/local/bin/kitchen:22:in `<main>'
+E, [2017-01-11T17:13:43.838636 #5087] ERROR -- Kitchen: ----End Backtrace-----
