@@ -1,0 +1,13 @@
+[Unit]
+Description=JIRA
+
+[Service]
+Type=forking
+ExecStart=/x1/jira/current/bin/start-jira.sh
+ExecStop=/x1/jira/current/bin/stop-jira.sh
+User=jira
+Group=jira
+
+[Install]
+WantedBy=multi-user.target
+Alias=fisheye.service
