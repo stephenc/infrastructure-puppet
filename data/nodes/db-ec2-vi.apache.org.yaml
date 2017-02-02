@@ -1,5 +1,5 @@
 ---
-classes:
+ classes:
   - datadog_agent::integrations::postgres
   - postgresql::server
   - postgresql_asf
