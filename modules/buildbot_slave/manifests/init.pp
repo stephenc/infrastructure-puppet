@@ -67,11 +67,6 @@ class buildbot_slave (
       system => true,
   }->
 
-  group {
-    'docker':
-      ensure => present,
-  }->
-
   user {
     $username:
       ensure     => $user_present,
