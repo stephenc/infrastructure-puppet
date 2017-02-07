@@ -6,6 +6,7 @@ classes:
 buildbot_slave::slave_name: 'bb_slave6_ubuntu'
 buildbot_slave::required_packages:
   - 'build-essential'
+  - 'docker-engine'
   - 'libaprutil1-dbd-sqlite3'
   - 'libaprutil1-ldap'
   - 'liblua5.3-dev'

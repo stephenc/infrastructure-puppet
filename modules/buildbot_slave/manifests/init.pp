@@ -67,6 +67,11 @@ class buildbot_slave (
       system => true,
   }->
 
+  group {
+    'docker':
+      ensure => present,
+  }->
+
   user {
     $username:
       ensure     => $user_present,
@@ -77,7 +82,7 @@ class buildbot_slave (
       gid        => $groupname,
       groups     => $groups,
       managehome => true,
-      require    => Group[$groupname],
+      require    => Group[$groupname, 'docker'],
   }->
 
   # Bootstrap the buildslave service
