@@ -2,6 +2,7 @@
 classes:
   - loggy
   - oraclejava::install
+  - imagemagick::install
 
 oraclejava::install::version: '8'
 oraclejava::install::unlimited_jce: true
