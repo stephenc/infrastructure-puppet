@@ -2,7 +2,8 @@
 classes:
   - loggy
   - oraclejava::install
-  - imagemagick::install
+  - imagemagick
+  - swftools
 
 oraclejava::install::version: '8'
 oraclejava::install::unlimited_jce: true

@@ -3,7 +3,8 @@
 class imagemagick (
   ) {
 
-  class { "imagemagick::install":
+    package { 'imagemagick':
+    ensure  => present,
   }
 
 }
